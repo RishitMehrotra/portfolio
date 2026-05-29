@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio | Rishit Mehrotra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="nav-logo">
+    <div class="logo-placeholder">RM</div>
+    <span class="nav-name">Rishit Mehrotra</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <h1 class="page-hero-title fade-in" style="z-index: 2;">Selected <em>Works</em></h1>
+</div>
+
+<div class="section" style="padding-top: 80px;">
+  <div class="work-grid fade-in">
+    <!-- Click on this will open Graphic Design Grid -->
+    <div class="work-item" onclick="openSubSections('Graphic Design')">
+      <div class="work-item-bg" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="work-overlay"><div class="work-title">Graphic Design</div></div>
+    </div>
+    
+    <div class="work-item" onclick="openSubSections('Motion Graphics')">
+      <div class="work-item-bg" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="work-overlay"><div class="work-title">Motion Graphics</div></div>
+    </div>
+    
+    <div class="work-item" onclick="openSubSections('VFX')">
+      <div class="work-item-bg" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="work-overlay"><div class="work-title">VFX</div></div>
+    </div>
+
+    <div class="work-item" onclick="openSubSections('Video Editing')">
+      <div class="work-item-bg" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="work-overlay"><div class="work-title">Video Editing</div></div>
+    </div>
+
+    <div class="work-item" onclick="openSubSections('2D Animation')">
+      <div class="work-item-bg" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="work-overlay"><div class="work-title">2D Animation</div></div>
+    </div>
+
+    <div class="work-item" onclick="openSubSections('Vector Illustration')">
+      <div class="work-item-bg" style="background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="work-overlay"><div class="work-title">Vector Illustration</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Rishit Mehrotra</div>
+  <div class="footer-text">© 2026 — Animation · Design · Film</div>
+</footer>
+
+<!-- MODAL WITH SPECIFIC CATEGORY GRIDS -->
+<div class="sub-modal-overlay" id="subModal">
+  <div class="sub-modal-content">
+    <span class="close-modal" onclick="closeSubSections()">&times;</span>
+    <h3 class="modal-title">Explore <em id="modalCategoryName">Category</em></h3>
+    
+    <!-- 1. GRAPHIC DESIGN (IMAGES) - NOW WITH 6 SECTIONS -->
+    <div class="category-grid" id="grid-Graphic-Design">
+      <!-- Tumhari 3 purani images (Updated to contain) -->
+      <div class="sub-project">
+        <img src="images/logo .png" style="width: 100%; height: 100%; object-fit: contain; background: #1A1A1A;" alt="Veridian Logo">
+        <div class="sub-project-info"><div class="sub-project-title">Veridian Logo Design</div></div>
+      </div>
+      <div class="sub-project">
+        <img src="images/letter head ].jpg" style="width: 100%; height: 100%; object-fit: contain; background: #1A1A1A;" alt="Veridian Letterhead">
+        <div class="sub-project-info"><div class="sub-project-title">Veridian Letterhead</div></div>
+      </div>
+      <div class="sub-project">
+        <img src="images/visting card.jpg" style="width: 100%; height: 100%; object-fit: contain; background: #1A1A1A;" alt="Veridian Visiting Card">
+        <div class="sub-project-info"><div class="sub-project-title">Veridian Visiting Card</div></div>
+      </div>
+      
+      <!-- 3 Naye sections (Updated to contain) -->
+      <div class="sub-project">
+        <img src="images/CHRISTMAS%20POST%20INSTA.jpg" style="width: 100%; height: 100%; object-fit: contain; background: #1A1A1A;" alt="New Design 1">
+        <div class="sub-project-info"><div class="sub-project-title">Christmas Social media post  </div></div>
+      </div>
+      <div class="sub-project">
+        <img src="images/insta%20post%20perfume.jpg" style="width: 100%; height: 100%; object-fit: contain; background: #1A1A1A;" alt="New Design 2">
+        <div class="sub-project-info"><div class="sub-project-title"> Social media post </div></div>
+      </div>
+      <div class="sub-project">
+        <img src="images/new%20year%20post%20instagram.jpg" style="width: 100%; height: 100%; object-fit: contain; background: #1A1A1A;" alt="New Design 3">
+        <div class="sub-project-info"><div class="sub-project-title">New Year Social media post </div></div>
+      </div>
+    </div>
+
+    <!-- 2. MOTION GRAPHICS (2 VIDEO EMBEDS ONLY) -->
+    <div class="category-grid" id="grid-Motion-Graphics">
+      <!-- PEHLA SECTION -->
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/qFF3JjO9DPI?si=51Ap0_PPRa1yQbyQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title">logo animation </div></div>
+      </div>
+      <!-- DOOSRA SECTION -->
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/VdnBoLTJ7lg?si=Y6Qv6qmpZlOQr1hm" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title">amul lassi ad </div></div>
+      </div>
+    </div>
+
+    <!-- 3. VFX (3 VIDEO EMBEDS) -->
+    <div class="category-grid" id="grid-VFX">
+      <!-- PEHLA SECTION: DOUBLE ROLE -->
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/6G1BbvAcrJU?si=gN6RECuSSPBO9Mx1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title">DOUBLE ROLE</div></div>
+      </div>
+      
+      <!-- DOOSRA SECTION: MATT PAINTING ANIMATION -->
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/SfvnxkYUaRM?si=bxvb2KxNAT7-1OKB" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title">MATT PAINTING ANIMATION</div></div>
+      </div>
+      
+      <!-- TEESRA SECTION: VFX PROJECT -->
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/7FQnsnrwPkQ?si=CgXWa43e7fMvwaR_" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title">Rotoscope </div></div>
+      </div>
+    </div>
+
+    <!-- 4. VIDEO EDITING (2 VIDEO EMBEDS ONLY) -->
+    <div class="category-grid" id="grid-Video-Editing">
+      <!-- PEHLA SECTION -->
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/csO1Xcdmxhw?si=SYE6xve55A8Y0D-k" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title">fan made trailer</div></div>
+      </div>
+      
+      <!-- DOOSRA SECTION: SHORT FILM TEASER -->
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/lOnZskZz7A8?si=yPlwgLbqpKtRAk8e" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title">SHORT FILM TEASER</div></div>
+      </div>
+    </div>
+
+    <!-- 5. 2D ANIMATION (SINGLE BEHANCE EMBED) -->
+    <div class="category-grid" id="grid-2D-Animation">
+      <div class="sub-project">
+        <iframe style="width: 100%; height: 100%; border: none;" src="https://www.behance.net/embed/project/240663005?ilo0=1" allowfullscreen lazyload allow="clipboard-write" refererPolicy="strict-origin-when-cross-origin"></iframe>
+        <div class="sub-project-info" style="pointer-events: none;"><div class="sub-project-title"></div></div>
+      </div>
+    </div>
+
+    <!-- 6. VECTOR ILLUSTRATION (2 IMAGE SECTIONS) -->
+    <div class="category-grid" id="grid-Vector-Illustration">
+      <!-- PEHLI IMAGE (Updated to contain) -->
+      <div class="sub-project">
+        <img src="images/POTRAIT.jpg" style="width:100%; height:100%; object-fit:contain; background: #1A1A1A;" alt="Vector Illustration 1">
+        <div class="sub-project-info"><div class="sub-project-title">Vector Potrait</div></div>
+      </div>
+      
+      <!-- DOOSRI IMAGE (Updated to contain) -->
+      <div class="sub-project">
+        <img src="images/character%20design.jpg" style="width:100%; height:100%; object-fit:contain; background: #1A1A1A;" alt="Vector Illustration 2">
+        <div class="sub-project-info"><div class="sub-project-title">character design</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
