@@ -6,8 +6,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   
-  <!-- 3D Model Viewer Script -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <!-- Three.js r128 & Loaders for Blender EEVEE 3D Viewport -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/inflate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/EXRLoader.js"></script>
+
+  <!-- Embedded Model Data & Viewport Engine -->
+  <script src="3d-models/models/car-data.js"></script>
+  <script src="3d-models/car-viewer.js"></script>
 </head>
 <body>
 
@@ -69,10 +78,13 @@
       <div class="work-overlay"><div class="work-title">Vector Illustration</div></div>
     </div>
 
-    <!-- NAYA SECTION: 3D Design -->
+    <!-- 3D Design: Blender EEVEE Car Model -->
     <div class="work-item" onclick="openSubSections('3D Design')">
-      <div class="work-item-bg" style="background-image: url('https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80');"></div>
-      <div class="work-overlay"><div class="work-title">3D Design</div></div>
+      <div class="work-item-bg" style="background-image: url('images/Screenshot%202026-09-15%20194919.png');"></div>
+      <div class="work-overlay">
+        <span style="font-size:10px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:6px;">Interactive EEVEE Model</span>
+        <div class="work-title">3D Design · Car (.FBX)</div>
+      </div>
     </div>
   </div>
 </div>
@@ -176,20 +188,111 @@
       </div>
     </div>
 
-    <!-- 7. NAYA MODAL GRID: 3D DESIGN -->
-   <div class="category-grid" id="grid-3D-Design">
-  <div class="sub-project" style="min-height: 400px;">
-    <model-viewer 
-      src="images/Screenshot%202026-09-15%20194919.png"
-      alt="3D MODLEl" 
-      camera-controls 
-      auto-rotate 
-      shadow-intensity="1" 
-      style="width: 100%; height: 100%; background: #1A1A1A;">
-    </model-viewer>
-    <div class="sub-project-info"><div class="sub-project-title">3D Interactive Render</div></div>
-  </div>
-</div>
+    <!-- 7. BLENDER EEVEE 3D VIEWPORT SECTION -->
+    <div class="category-grid full-viewport-grid" id="grid-3D-Design">
+      <div class="blender-stage" id="carViewerStage">
+        
+        <!-- Viewport Top Header -->
+        <div class="blender-header">
+          <div class="blender-title-wrap">
+            <span class="engine-badge">BLENDER EEVEE</span>
+            <span class="model-name">CAR MODEL (.FBX)</span>
+            <span class="status-pill" id="hdriStatusBadge">● 4K EXR HDRI</span>
+            <span class="stats-pill" id="carPolyStats">PBR Mesh</span>
+          </div>
+
+          <div class="blender-tools">
+            <!-- Shading Modes -->
+            <div class="tool-group">
+              <span class="tool-label">SHADING</span>
+              <button class="shading-btn active" data-shading="rendered" onclick="setShadingMode('rendered')" title="EEVEE Rendered (HDRI IBL)">Rendered</button>
+              <button class="shading-btn" data-shading="solid" onclick="setShadingMode('solid')" title="Blender Solid (Clay)">Solid</button>
+              <button class="shading-btn" data-shading="wireframe" onclick="setShadingMode('wireframe')" title="Topology Wireframe">Wire</button>
+            </div>
+
+            <!-- Camera View Presets -->
+            <div class="tool-group">
+              <span class="tool-label">VIEW</span>
+              <button class="view-btn active" data-view="persp" onclick="setCameraPreset('persp')" title="Perspective 3/4">Persp</button>
+              <button class="view-btn" data-view="front" onclick="setCameraPreset('front')" title="Front (Numpad 1)">Front</button>
+              <button class="view-btn" data-view="side" onclick="setCameraPreset('side')" title="Side (Numpad 3)">Side</button>
+              <button class="view-btn" data-view="top" onclick="setCameraPreset('top')" title="Top (Numpad 7)">Top</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Canvas Container -->
+        <div class="canvas-wrapper" id="carViewerContainer">
+          <div class="car-loading-overlay" id="carLoadingOverlay">
+            <div class="blender-spinner"></div>
+            <div class="car-loading-text">Loading Car Model (.FBX)...</div>
+            <div class="car-loading-sub">Compiling EEVEE PBR shaders & HDRI</div>
+          </div>
+        </div>
+
+        <!-- Interactive Blender XYZ Orientation Gizmo (Top Right) -->
+        <div class="blender-gizmo" id="blenderGizmo" title="Click axis to snap view">
+          <div class="gizmo-stage">
+            <div class="gizmo-group" id="gizmoGroup">
+              <div class="gizmo-axis axis-x" onclick="setCameraPreset('side')"><span>X</span></div>
+              <div class="gizmo-axis axis-y" onclick="setCameraPreset('top')"><span>Y</span></div>
+              <div class="gizmo-axis axis-z" onclick="setCameraPreset('front')"><span>Z</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Left: Viewport Toggles -->
+        <div class="viewport-bottom-left">
+          <button class="viewport-btn active" id="autoRotateBtn" onclick="toggleAutoRotate()" title="Toggle 360 Turntable Spin">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            Auto Rotate
+          </button>
+          <button class="viewport-btn active" id="gridBtn" onclick="toggleGrid()" title="Toggle Blender 3D Floor Grid">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+            Floor Grid
+          </button>
+          <button class="viewport-btn" id="hdriBgBtn" onclick="toggleHdriBg()" title="Toggle Panoramic Skybox vs Studio Dark">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            HDRI Sky
+          </button>
+          <div class="exposure-control">
+            <span class="control-label">EXP:</span>
+            <input type="range" min="0.5" max="2.5" step="0.05" value="1.15" oninput="setExposure(this.value)">
+            <span id="exposureVal">1.15</span>
+          </div>
+        </div>
+
+        <!-- Bottom Right: Paint Customizer & Fullscreen -->
+        <div class="viewport-bottom-right">
+          <div class="paint-customizer">
+            <span class="paint-label">PAINT</span>
+            <button class="paint-swatch active" data-color="#C9A84C" style="background:#C9A84C;" onclick="setCarPaintColor('#C9A84C')" title="Royal Gold"></button>
+            <button class="paint-swatch" data-color="#141416" style="background:#141416;" onclick="setCarPaintColor('#141416')" title="Obsidian Black"></button>
+            <button class="paint-swatch" data-color="#C41E3A" style="background:#C41E3A;" onclick="setCarPaintColor('#C41E3A')" title="Crimson Red"></button>
+            <button class="paint-swatch" data-color="#D4D8DC" style="background:#D4D8DC;" onclick="setCarPaintColor('#D4D8DC')" title="Liquid Silver"></button>
+            <button class="paint-swatch" data-color="#0B2545" style="background:#0B2545;" onclick="setCarPaintColor('#0B2545')" title="Midnight Blue"></button>
+            <label class="paint-swatch color-picker-label" title="Custom Paint Color">
+              <input type="color" value="#C9A84C" onchange="setCarPaintColor(this.value)" style="opacity:0; width:0; height:0; position:absolute;">
+              <span>+</span>
+            </label>
+          </div>
+          <button class="viewport-btn icon-only" onclick="setCameraPreset('persp')" title="Reset Camera">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          </button>
+          <button class="viewport-btn icon-only" onclick="toggleFullscreenViewport()" title="Fullscreen Viewport">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </button>
+        </div>
+
+        <!-- Mouse Navigation Hint Bar -->
+        <div class="blender-nav-hints">
+          <span><kbd>Left Click + Drag</kbd> Orbit (Every Angle)</span>
+          <span><kbd>Right Click + Drag</kbd> Pan</span>
+          <span><kbd>Scroll</kbd> Zoom</span>
+        </div>
+
+      </div>
+    </div>
 
   </div>
 </div>

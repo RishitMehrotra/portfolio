@@ -63,11 +63,22 @@ window.openSubSections = function(category) {
     }
 
     subModal.classList.add('active');
+
+    // Trigger Blender EEVEE 3D Viewport
+    if (category === '3D Design') {
+      setTimeout(function() {
+        if (typeof window.initCarViewer === 'function') {
+          window.initCarViewer();
+        }
+      }, 80);
+    }
   }
 }
 
 window.closeSubSections = function() {
-  if(subModal) subModal.classList.remove('active');
+  if(subModal) {
+    subModal.classList.remove('active');
+  }
 }
 
 if(subModal) {
